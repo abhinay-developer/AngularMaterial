@@ -1,0 +1,99 @@
+<div class="container mt-5">
+  <!-- <mat-form-field floatLabel="never">
+    <input matInput  (keyup)="doFilter($event.target.value)" type="text">
+</mat-form-field> -->
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 example-container">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span>No #</span>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="icon">
+      <th mat-header-cell *matHeaderCellDef>
+        <i class="fa-solid fa-filter fa-2x" (click)="hideFilter()"></i>
+      </th>
+      <td mat-cell *matCellDef="let element"></td>
+    </ng-container>
+    <ng-container matColumnDef="header-row-intial">
+      <th mat-header-cell *matHeaderCellDef>
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-first-group">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field floatLabel="never">
+          <input matInput (keyup)="doFilter($event.target.value)">
+        </mat-form-field>
+      </th>
+    </ng-container>
+
+    <!-- Header row second group -->
+    <ng-container matColumnDef="header-row-second-group">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field floatLabel="never">
+          <input matInput>
+        </mat-form-field>
+      </th>
+    </ng-container>
+    <ng-container matColumnDef="header-row-third-group">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field floatLabel="never">
+          <input matInput>
+        </mat-form-field>
+      </th>
+    </ng-container>
+    <ng-container matColumnDef="header-row-fourth-group">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field floatLabel="never">
+          <input matInput>
+          <!-- <button type="button">hello</button> -->
+        </mat-form-field>
+      </th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row
+        *matHeaderRowDef="['header-row-intial','header-row-first-group', 'header-row-second-group','header-row-third-group','header-row-fourth-group']">
+      </tr>
+    <tr mat-row style="border: 2px solid green;" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20]" aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
