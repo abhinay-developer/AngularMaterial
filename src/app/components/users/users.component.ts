@@ -59,8 +59,7 @@ export class UsersComponent implements OnInit,AfterViewInit {
   }
   public doFilter = (value: string) => {
     console.log(value)
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
-
+      this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -71,8 +70,15 @@ export class UsersComponent implements OnInit,AfterViewInit {
       this.filterValues.id = id;
       // this.dataSource.filter = JSON.stringify(this.filterValues);
       // this.dataSource.filterPredicate = this.createFilter();
-
+      this.dataSource.filterPredicate = function(data, filter: string): boolean {
+        return data.id.toLowerCase().includes(filter);
+      };
     });
+  }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
   // hello(event){
   //   console.log(event);

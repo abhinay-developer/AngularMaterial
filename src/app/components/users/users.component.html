@@ -57,9 +57,15 @@
 
     <ng-container matColumnDef="header-row-first-group">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field floatLabel="never">
+        <!-- <mat-form-field floatLabel="never">
           <input matInput (keyup)="doFilter($event.target.value)">
-        </mat-form-field>
+          <select value="1" >1</select>
+        </mat-form-field> -->
+        <mat-select (selectionChange)="doFilter($event.value)">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="10">10</mat-option>
+
+        </mat-select>
       </th>
     </ng-container>
 
